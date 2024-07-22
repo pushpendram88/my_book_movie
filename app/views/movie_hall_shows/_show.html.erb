@@ -1,0 +1,17 @@
+<h1> Seats </h1>
+
+<table>
+  <% @hall.number_of_row.times.each do |row| %>
+    <% row = ('a'..'z').to_a[row] %>
+    <tr>
+      <% @hall.number_of_column.times.each do |column| %>
+        <% seat = row.to_s + (column + 1).to_s%>
+        <% if @available_seats.include? seat %>
+          <td class = "green"><%= button_to "#{seat} book", {:controller => "bookings", :action => "create", :seat => seat, :movie_hall_show_id=> @movie_hall_show.id} %></td>
+        <% else %>
+          <td class = "red"><%= seat %></td>
+        <%  end %>
+      <% end %>
+    <tr>
+  <%end%>
+</table>

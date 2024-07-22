@@ -1,0 +1,17 @@
+<table>
+  <% @hall.number_of_row.times.each do |row| %>
+    <% row = ('a'..'z').to_a[row] %>
+    <tr>
+      <% @hall.number_of_column.times.each do |column| %>
+        <td><%= row.to_s + (column + 1).to_s  %></td>
+      <%  end %>
+    <tr>
+  <%end%>
+</table>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>

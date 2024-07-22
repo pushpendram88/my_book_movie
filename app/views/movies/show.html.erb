@@ -1,0 +1,45 @@
+
+<h3>Name: <%= @movie.name %></h3>
+<h3>Genre: <%= @movie.genre %></h3>
+<h3>Description: <%= @movie.description %></h3>
+<h3>Format: <%= @movie.format %></h3>
+
+<br />
+<table>
+  <tr>
+    <th>Hall Name</th>
+    <th></th>
+  </tr>
+    <% @movie.halls.each do |hall| %>
+      <tr>
+        <td><%= hall.name %></td>
+        <table>
+          <% hall.movie_hall_shows.each do |movie_hall_show| %>
+            <tr>
+              <td> <%= link_to movie_hall_show.show_time_format, movie_hall_show, remote: true  %> </td>
+            </tr>
+          <% end %>
+        </table>
+      </tr>
+    <% end %>
+</table>
+
+<div id='seats'>
+
+</div>
+
+<h1> Review </h1>
+<% @movie.reviews.each do |review| %>
+  <dl>
+    <dt><%= review.content %></dt>
+    <dd>- <%= review.user.email %></dd>
+  </dl>
+<% end %>
+
+
+<%= form_for Review.new do |f| %>
+  <%= f.text_field :content %><br />
+  <%= f.hidden_field :user_id, value: current_user.id %><br />
+  <%= f.hidden_field :movie_id, value: @movie.id %><br />
+  <%= f.submit %>
+<% end %>
